@@ -1,10 +1,10 @@
 <?php
 
-namespace DivineOmega\EloquentAttributeValuePrediction\Console\Commands;
+namespace JordJD\EloquentAttributeValuePrediction\Console\Commands;
 
-use DivineOmega\EloquentAttributeValuePrediction\Helpers\DatasetHelper;
-use DivineOmega\EloquentAttributeValuePrediction\Helpers\PathHelper;
-use DivineOmega\EloquentAttributeValuePrediction\Interfaces\HasPredictableAttributes;
+use JordJD\EloquentAttributeValuePrediction\Helpers\DatasetHelper;
+use JordJD\EloquentAttributeValuePrediction\Helpers\PathHelper;
+use JordJD\EloquentAttributeValuePrediction\Interfaces\HasPredictableAttributes;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;

@@ -1,9 +1,9 @@
 <?php
 
-namespace DivineOmega\EloquentAttributeValuePrediction\Traits;
+namespace JordJD\EloquentAttributeValuePrediction\Traits;
 
-use DivineOmega\EloquentAttributeValuePrediction\Helpers\DatasetHelper;
-use DivineOmega\EloquentAttributeValuePrediction\Helpers\PathHelper;
+use JordJD\EloquentAttributeValuePrediction\Helpers\DatasetHelper;
+use JordJD\EloquentAttributeValuePrediction\Helpers\PathHelper;
 use Exception;
 use InvalidArgumentException;
 use Rubix\ML\PersistentModel;

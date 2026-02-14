@@ -1,6 +1,6 @@
 <?php
 
-namespace DivineOmega\EloquentAttributeValuePrediction\Interfaces;
+namespace JordJD\EloquentAttributeValuePrediction\Interfaces;
 
 interface HasPredictableAttributes
 {

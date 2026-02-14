@@ -1,8 +1,8 @@
 <?php
 
-namespace DivineOmega\EloquentAttributeValuePrediction;
+namespace JordJD\EloquentAttributeValuePrediction;
 
-use DivineOmega\EloquentAttributeValuePrediction\Console\Commands\Train;
+use JordJD\EloquentAttributeValuePrediction\Console\Commands\Train;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
 class ServiceProvider extends BaseServiceProvider

@@ -1,6 +1,6 @@
 <?php
 
-namespace DivineOmega\EloquentAttributeValuePrediction\Helpers;
+namespace JordJD\EloquentAttributeValuePrediction\Helpers;
 
 abstract class PathHelper
 {

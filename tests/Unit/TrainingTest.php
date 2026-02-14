@@ -1,10 +1,10 @@
 <?php
 
-namespace DivineOmega\EloquentAttributeValuePrediction\Tests\Unit;
+namespace JordJD\EloquentAttributeValuePrediction\Tests\Unit;
 
-use DivineOmega\EloquentAttributeValuePrediction\Helpers\PathHelper;
-use DivineOmega\EloquentAttributeValuePrediction\ServiceProvider;
-use DivineOmega\EloquentAttributeValuePrediction\Tests\Unit\TestClasses\Eloquent\IrisFlower;
+use JordJD\EloquentAttributeValuePrediction\Helpers\PathHelper;
+use JordJD\EloquentAttributeValuePrediction\ServiceProvider;
+use JordJD\EloquentAttributeValuePrediction\Tests\Unit\TestClasses\Eloquent\IrisFlower;
 use Illuminate\Database\Eloquent\Model;
 use Orchestra\Testbench\TestCase;
 

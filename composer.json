@@ -22,18 +22,18 @@
   },
   "autoload": {
     "psr-4": {
-      "DivineOmega\\EloquentAttributeValuePrediction\\": "src/"
+      "JordJD\\EloquentAttributeValuePrediction\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "DivineOmega\\EloquentAttributeValuePrediction\\Tests\\": "tests/"
+      "JordJD\\EloquentAttributeValuePrediction\\Tests\\": "tests/"
     }
   },
   "extra": {
     "laravel": {
       "providers": [
-        "DivineOmega\\EloquentAttributeValuePrediction\\ServiceProvider"
+        "JordJD\\EloquentAttributeValuePrediction\\ServiceProvider"
       ]
     },
     "branch-alias": {

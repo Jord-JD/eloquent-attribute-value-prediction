@@ -75,8 +75,8 @@ This is done by adding the `HasPredictableAttributes` interface and
 
 namespace App\Models;
 
-use DivineOmega\EloquentAttributeValuePrediction\Interfaces\HasPredictableAttributes;
-use DivineOmega\EloquentAttributeValuePrediction\Traits\PredictsAttributes;
+use JordJD\EloquentAttributeValuePrediction\Interfaces\HasPredictableAttributes;
+use JordJD\EloquentAttributeValuePrediction\Traits\PredictsAttributes;
 use Illuminate\Database\Eloquent\Model;
 
 class IrisFlower extends Model implements HasPredictableAttributes

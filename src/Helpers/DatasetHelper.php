@@ -1,6 +1,6 @@
 <?php
 
-namespace DivineOmega\EloquentAttributeValuePrediction\Helpers;
+namespace JordJD\EloquentAttributeValuePrediction\Helpers;
 
 use InvalidArgumentException;
 use Rubix\ML\Datasets\Unlabeled;

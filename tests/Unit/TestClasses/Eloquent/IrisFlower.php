@@ -1,12 +1,12 @@
 <?php
 
-namespace DivineOmega\EloquentAttributeValuePrediction\Tests\Unit\TestClasses\Eloquent;
+namespace JordJD\EloquentAttributeValuePrediction\Tests\Unit\TestClasses\Eloquent;
 
-use DivineOmega\EloquentAttributeValuePrediction\Interfaces\HasPredictableAttributes;
-use DivineOmega\EloquentAttributeValuePrediction\Traits\PredictsAttributes;
-use DivineOmega\uxdm\Objects\Destinations\AssociativeArrayDestination;
-use DivineOmega\uxdm\Objects\Migrator;
-use DivineOmega\uxdm\Objects\Sources\CSVSource;
+use JordJD\EloquentAttributeValuePrediction\Interfaces\HasPredictableAttributes;
+use JordJD\EloquentAttributeValuePrediction\Traits\PredictsAttributes;
+use JordJD\uxdm\Objects\Destinations\AssociativeArrayDestination;
+use JordJD\uxdm\Objects\Migrator;
+use JordJD\uxdm\Objects\Sources\CSVSource;
 use Illuminate\Database\Eloquent\Model;
 use Sushi\Sushi;
 
