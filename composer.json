@@ -44,6 +44,6 @@
     "test": "phpunit"
   },
   "replace": {
-    "jord-jd/eloquent-attribute-value-prediction": "self.version"
+    "divineomega/eloquent-attribute-value-prediction": "self.version"
   }
 }
