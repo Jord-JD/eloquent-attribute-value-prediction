@@ -1,43 +1,49 @@
 {
-    "name": "divineomega/eloquent-attribute-value-prediction",
-    "description": "Predict attribute values for your Laravel Eloquent models using machine learning!",
-    "type": "library",
-    "license": "LGPL-3.0-only",
-    "authors": [
-        {
-            "name": "Jordan Hall",
-            "email": "jordan@hall05.co.uk"
-        }
-    ],
-    "require": {
-        "php": ">=7.1",
-        "laravel/framework": "^5.1||^6.0||^7.0||^8.0",
-        "rubix/ml": "0.2.*"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^7.0||^8.0",
-        "calebporzio/sushi": "^2.1",
-        "divineomega/uxdm": "^4.0",
-        "orchestra/testbench": "^6.3"
-    },
-    "autoload": {
-        "psr-4": {
-            "DivineOmega\\EloquentAttributeValuePrediction\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "DivineOmega\\EloquentAttributeValuePrediction\\Tests\\": "tests/"
-        }
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "DivineOmega\\EloquentAttributeValuePrediction\\ServiceProvider"
-            ]
-        }
-    },
-    "scripts": {
-        "test": "phpunit"
+  "name": "jord-jd/eloquent-attribute-value-prediction",
+  "description": "Predict attribute values for your Laravel Eloquent models using machine learning!",
+  "type": "library",
+  "license": "LGPL-3.0-only",
+  "authors": [
+    {
+      "name": "Jordan Hall",
+      "email": "jordan@hall05.co.uk"
     }
+  ],
+  "require": {
+    "php": ">=7.1",
+    "laravel/framework": "^5.1||^6.0||^7.0||^8.0",
+    "rubix/ml": "0.2.*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^7.0||^8.0",
+    "calebporzio/sushi": "^2.1",
+    "divineomega/uxdm": "^4.0",
+    "orchestra/testbench": "^6.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "DivineOmega\\EloquentAttributeValuePrediction\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "DivineOmega\\EloquentAttributeValuePrediction\\Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "DivineOmega\\EloquentAttributeValuePrediction\\ServiceProvider"
+      ]
+    },
+    "branch-alias": {
+      "dev-master": "2.0-dev"
+    }
+  },
+  "scripts": {
+    "test": "phpunit"
+  },
+  "replace": {
+    "jord-jd/eloquent-attribute-value-prediction": "self.version"
+  }
 }

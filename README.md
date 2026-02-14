@@ -6,11 +6,11 @@
 </p>
 
 <p align="center">
-    <a href="https://github.com/DivineOmega/eloquent-attribute-value-prediction/actions">
-        <img src="https://github.com/DivineOmega/eloquent-attribute-value-prediction/workflows/Tests/badge.svg" />
+    <a href="https://github.com/Jord-JD/eloquent-attribute-value-prediction/actions">
+        <img src="https://github.com/Jord-JD/eloquent-attribute-value-prediction/workflows/Tests/badge.svg" />
     </a>
-    <a href="https://packagist.org/packages/divineomega/eloquent-attribute-value-prediction/stats">
-        <img src="https://img.shields.io/packagist/dt/DivineOmega/eloquent-attribute-value-prediction.svg" />
+    <a href="https://packagist.org/packages/jord-jd/eloquent-attribute-value-prediction/stats">
+        <img src="https://img.shields.io/packagist/dt/Jord-JD/eloquent-attribute-value-prediction.svg" />
     </a>
 </p>
 
@@ -53,7 +53,7 @@ $house->value = $house->predict('value');
 To install just run the following Composer command.
 
 ```bash
-composer require divineomega/eloquent-attribute-value-prediction
+composer require jord-jd/eloquent-attribute-value-prediction
 ```
 
 After installation, you need to set up your model for attribute prediction.
