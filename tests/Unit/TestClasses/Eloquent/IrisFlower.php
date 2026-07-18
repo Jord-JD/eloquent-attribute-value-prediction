@@ -4,9 +4,6 @@ namespace JordJD\EloquentAttributeValuePrediction\Tests\Unit\TestClasses\Eloquen
 
 use JordJD\EloquentAttributeValuePrediction\Interfaces\HasPredictableAttributes;
 use JordJD\EloquentAttributeValuePrediction\Traits\PredictsAttributes;
-use JordJD\uxdm\Objects\Destinations\AssociativeArrayDestination;
-use JordJD\uxdm\Objects\Migrator;
-use JordJD\uxdm\Objects\Sources\CSVSource;
 use Illuminate\Database\Eloquent\Model;
 use Sushi\Sushi;
 
@@ -44,11 +41,20 @@ class IrisFlower extends Model implements HasPredictableAttributes
     public function getRows()
     {
         $rows = [];
+        $handle = fopen(__DIR__.'/../../data/iris.csv', 'r');
+        $headers = fgetcsv($handle);
 
-        (new Migrator())
-            ->setSource(new CsvSource(__DIR__ . '/../../data/iris.csv'))
-            ->setDestination(new AssociativeArrayDestination($rows))
-            ->migrate();
+        while (($values = fgetcsv($handle)) !== false) {
+            $row = array_combine($headers, $values);
+
+            foreach (['sepal_length', 'sepal_width', 'petal_length', 'petal_width'] as $attribute) {
+                $row[$attribute] = (float) $row[$attribute];
+            }
+
+            $rows[] = $row;
+        }
+
+        fclose($handle);
 
         return $rows;
     }

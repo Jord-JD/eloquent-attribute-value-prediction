@@ -3,6 +3,7 @@
 namespace JordJD\EloquentAttributeValuePrediction\Tests\Unit;
 
 use JordJD\EloquentAttributeValuePrediction\Helpers\PathHelper;
+use JordJD\EloquentAttributeValuePrediction\Exceptions\ModelNotTrainedException;
 use JordJD\EloquentAttributeValuePrediction\ServiceProvider;
 use JordJD\EloquentAttributeValuePrediction\Tests\Unit\TestClasses\Eloquent\IrisFlower;
 use Illuminate\Database\Eloquent\Model;
@@ -28,10 +29,23 @@ final class TrainingTest extends TestCase
             unlink($petalWidthModelPath);
         }
 
+        try {
+            IrisFlower::first()->predict('species');
+            $this->fail('Expected an untrained model exception.');
+        } catch (ModelNotTrainedException $exception) {
+            $this->assertStringContainsString('php artisan eavp:train', $exception->getMessage());
+        }
+
         $this->artisan('eavp:train', ['model' => Irisflower::class]);
 
         $this->assertFileExists($speciesModelPath);
         $this->assertFileExists($petalWidthModelPath);
+    }
+
+    public function testMissingModelClassReturnsFailure()
+    {
+        $this->artisan('eavp:train', ['model' => 'App\\Models\\MissingModel'])
+            ->assertExitCode(1);
     }
 
 }

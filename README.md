@@ -18,6 +18,8 @@
 
 With this package you'll be able to predict attribute values for your Laravel Eloquent models using the power of machine learning! 🌟
 
+Compatible with PHP 7.4+ and Laravel 5.1 through 13.
+
 With an intuitive syntax you can predict the values of both categorical (string) and continuous (numeric) attributes. Take a look at the examples below.
 
 ```php
@@ -148,6 +150,9 @@ You can re-run this command (manually, or on a schedule) to re-train your
 machine learning model(s). Previously trained models will be replaced 
 automatically. 
 
+If prediction is attempted before training, a `ModelNotTrainedException` is thrown
+with the exact Artisan command needed to generate the missing model file.
+
 ## Prediction
 
 Once you have set up your Eloquent model, and trained your machine learning 
@@ -206,6 +211,28 @@ confident the flower is a Virginica.
 Note that you can only use the `getPredictions` method if the attribute you are
 attempting to predict the value of is non-numeric. 
 
+### Relationship features
+
+Related model data can be used as predictor features with Laravel dot notation:
+
+```php
+public function registerPredictableAttributes(): array
+{
+    return [
+        'recommended_price' => [
+            'category.name',
+            'supplier.country_code',
+            'tags.*.name',
+        ],
+    ];
+}
+```
+
+To-one models are represented by their morph type and key when the relationship name
+itself is used. To-many values are normalised and sorted so that relationship order does
+not change the generated feature. Relationship support applies to predictor features;
+the predicted target remains an Eloquent attribute.
+
 ### Changing attribute estimators
 
 By default, attribute values are predicted using K-d Neighbors. 
@@ -233,7 +260,7 @@ In the example above, we are changing the estimator for the `species` attribute
 to a multilayer perceptron classifier (neural network) with two densely connected 
 hidden layers.
 
-Under the hood, this package uses the [Rubix ML](https://rubixml.com/) library.
+Under the hood, this package uses [Rubix ML 2.x](https://rubixml.com/).
 This means you can use any estimator is supports.
 
 See the [Choosing an Estimator](https://docs.rubixml.com/latest/choosing-an-estimator.html)

@@ -11,14 +11,13 @@
   ],
   "require": {
     "php": "^7.4 || ^8.0",
-    "laravel/framework": "^5.1||^6.0||^7.0||^8.0",
-    "rubix/ml": "0.2.*"
+    "laravel/framework": "^5.1||^6.0||^7.0||^8.0||^9.0||^10.0||^11.0||^12.0||^13.0",
+    "rubix/ml": "^2.5"
   },
   "require-dev": {
-    "phpunit/phpunit": "^9.6",
-    "calebporzio/sushi": "^2.1",
-    "jord-jd/uxdm": "^6.0",
-    "orchestra/testbench": "^6.3"
+    "phpunit/phpunit": "^8.5||^9.6||^10.5||^11.5||^12.0",
+    "calebporzio/sushi": "^2.5",
+    "orchestra/testbench": "^3.8||^4.0||^5.0||^6.0||^7.0||^8.0||^9.0||^10.0||^11.0"
   },
   "autoload": {
     "psr-4": {
@@ -37,11 +36,16 @@
       ]
     },
     "branch-alias": {
-      "dev-master": "2.0-dev"
+      "dev-master": "3.x-dev"
     }
   },
   "scripts": {
     "test": "phpunit"
+  },
+  "config": {
+    "allow-plugins": {
+      "kylekatarnls/update-helper": false
+    }
   },
   "replace": {
     "divineomega/eloquent-attribute-value-prediction": "self.version"

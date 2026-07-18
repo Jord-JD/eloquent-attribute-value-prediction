@@ -4,6 +4,7 @@ namespace JordJD\EloquentAttributeValuePrediction\Traits;
 
 use JordJD\EloquentAttributeValuePrediction\Helpers\DatasetHelper;
 use JordJD\EloquentAttributeValuePrediction\Helpers\PathHelper;
+use JordJD\EloquentAttributeValuePrediction\Exceptions\ModelNotTrainedException;
 use Exception;
 use InvalidArgumentException;
 use Rubix\ML\PersistentModel;
@@ -17,6 +18,10 @@ trait PredictsAttributes
 
         $modelPath = PathHelper::getModelPath(get_class($this), $attribute);
 
+        if (!is_file($modelPath)) {
+            throw ModelNotTrainedException::forModel(get_class($this), $attribute);
+        }
+
         $estimator = PersistentModel::load(new Filesystem($modelPath));
 
         $prediction = $estimator->predict($dataset)[0];
@@ -28,13 +33,17 @@ trait PredictsAttributes
     {
         if ($this->isAttributeContinuous($attribute)) {
             throw new InvalidArgumentException(
-                'You can not get multiple predictions for a continious (numeric) argument. Try using the `predict` method instead.'
+                'You cannot get multiple predictions for a continuous (numeric) attribute. Try using the `predict` method instead.'
             );
         }
 
         $dataset = DatasetHelper::buildUnlabeledDataset($this, $attribute);
 
         $modelPath = PathHelper::getModelPath(get_class($this), $attribute);
+
+        if (!is_file($modelPath)) {
+            throw ModelNotTrainedException::forModel(get_class($this), $attribute);
+        }
 
         $estimator = PersistentModel::load(new Filesystem($modelPath));
 

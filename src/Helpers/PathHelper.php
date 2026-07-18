@@ -9,7 +9,9 @@ abstract class PathHelper
         $modelDirectory = storage_path('eavp/models/');
 
         if (!is_dir($modelDirectory)) {
-            mkdir($modelDirectory, 0777, true);
+            if (!@mkdir($modelDirectory, 0777, true) && !is_dir($modelDirectory)) {
+                throw new \RuntimeException('Unable to create the prediction model directory at '.$modelDirectory.'.');
+            }
         }
 
         $model = new $modelClass;
