@@ -1,0 +1,33 @@
+name: Tests
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - php: '7.4'
+            laravel: '^5.8'
+            testbench: '^3.8'
+            composer: 'v2.2'
+          - php: '8.5'
+            laravel: '^13.0'
+            testbench: '^11.0'
+            composer: 'latest'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: pdo_sqlite
+          tools: composer:${{ matrix.composer }}
+          coverage: none
+      - run: composer require laravel/framework:${{ matrix.laravel }} orchestra/testbench:${{ matrix.testbench }} --dev --no-update
+      - run: composer update --prefer-dist --no-interaction
+      - run: vendor/bin/phpunit

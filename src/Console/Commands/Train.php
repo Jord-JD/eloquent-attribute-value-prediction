@@ -7,28 +7,17 @@ use JordJD\EloquentAttributeValuePrediction\Helpers\PathHelper;
 use JordJD\EloquentAttributeValuePrediction\Interfaces\HasPredictableAttributes;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\App;
 use Rubix\ML\Classifiers\KDNeighbors;
-use Rubix\ML\Classifiers\KNearestNeighbors;
-use Rubix\ML\Classifiers\MultilayerPerceptron;
 use Rubix\ML\Datasets\Labeled;
 use Rubix\ML\DataType;
 use Rubix\ML\Estimator;
-use Rubix\ML\NeuralNet\Layers\Dense;
-use Rubix\ML\NeuralNet\Layers\PReLU;
-use Rubix\ML\NeuralNet\Optimizers\Adam;
-use Rubix\ML\Other\Loggers\BlackHole;
 use Rubix\ML\PersistentModel;
 use Rubix\ML\Persisters\Filesystem;
 use Rubix\ML\Pipeline;
 use Rubix\ML\Regressors\KDNeighborsRegressor;
-use Rubix\ML\Regressors\KNNRegressor;
-use Rubix\ML\Regressors\MLPRegressor;
 use Rubix\ML\Transformers\OneHotEncoder;
 use Rubix\ML\Transformers\ZScaleStandardizer;
 use Rubix\ML\Transformers\MissingDataImputer;
-use Rubix\ML\Other\Loggers\Screen;
-use Rubix\ML\Transformers\NumericStringConverter;
 
 
 class Train extends Command
@@ -66,17 +55,24 @@ class Train extends Command
     {
         $modelClass = $this->argument('model');
 
+        if (!class_exists($modelClass)) {
+            $this->error('The provided model class does not exist.');
+
+            return 1;
+        }
+
         /** @var Model $model */
         $model = new $modelClass;
 
         if (!$model instanceof Model) {
             $this->error('The provided class is not an Eloquent model.');
-            die;
+            return 1;
         }
 
         if (!$model instanceof HasPredictableAttributes) {
-            $this->error('The provided class does not implement the AttributeValuePredictionModelInterface.');
-            die;
+            $this->error('The provided class does not implement HasPredictableAttributes.');
+
+            return 1;
         }
 
         // Get all model attributes
@@ -105,14 +101,11 @@ class Train extends Command
                 foreach ($instances as $instance) {
                     $samples[] = DatasetHelper::buildSample($instance, $attributesToTrainFrom);
 
-                    $classValue = $instance->getAttributeValue($classAttribute);
+                    $classValue = $instance->getAttribute($classAttribute);
                     if ($classValue === null) {
                         $classValue = '?';
                     }
-                    if (is_object($classValue) || is_array($classValue)) {
-                        $classValue = serialize($classValue);
-                    }
-                    $classes[] = $classValue;
+                    $classes[] = DatasetHelper::normaliseValue($classValue);
                 }
             });
 
@@ -120,13 +113,14 @@ class Train extends Command
 
             $estimator->train($dataset);
 
-            $estimator->setLogger(new BlackHole());
             $estimator->save();
 
             $this->line('Training completed for '.$classAttribute.'.');
         }
 
         $this->line('All training completed.');
+
+        return 0;
     }
 
     private function getEstimator(string $modelPath, Estimator $baseEstimator): Estimator
@@ -135,10 +129,6 @@ class Train extends Command
             new Pipeline($this->getTransformers($baseEstimator), $baseEstimator),
             new Filesystem($modelPath)
         );
-
-        if (!App::runningUnitTests()) {
-            $estimator->setLogger(new Screen('train-model'));
-        }
 
         return $estimator;
     }
